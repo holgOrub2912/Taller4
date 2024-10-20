@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Arrays;
 import edu.princeton.cs.algs4.MinPQ;
 //usar BarChart de la libreia JFreeChart
 
@@ -281,10 +282,10 @@ public class Pelicula implements Comparable<Pelicula> {
             return null;
         }
 
-        List<Pelicula> topPeliculas = new ArrayList<Pelicula>(M);
+        Pelicula[] peliarr = new Pelicula[M];
         for (Pelicula peli: pelipq)
-            topPeliculas.add(peli);
-        return topPeliculas;
+            peliarr[--M] = peli;
+        return Arrays.asList(peliarr);
     }
 
 }
