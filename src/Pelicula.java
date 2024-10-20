@@ -8,6 +8,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Arrays;
 import edu.princeton.cs.algs4.MinPQ;
+import edu.princeton.cs.algs4.BST;
+>>>>>>> b0110c521d5821ad2d58b2c3ec8ee892619680cc
 //usar BarChart de la libreia JFreeChart
 
 public class Pelicula implements Comparable<Pelicula> {
@@ -198,9 +200,9 @@ public class Pelicula implements Comparable<Pelicula> {
          */
     }
 
-    public static ST<String, ST<Integer, List<Pelicula>>> clasificarPeliculas(Pelicula[] peliculas) {
+    public static ST<String, BST<Integer, List<Pelicula>>> clasificarPeliculas(Pelicula[] peliculas) {
         // Crear la tabla de simbolos principal donde la llave es el genero
-        ST<String, ST<Integer, List<Pelicula>>> clasificacion = new ST<>();
+        ST<String, BST<Integer, List<Pelicula>>> clasificacion = new ST<>();
     
         for (Pelicula peli : peliculas) {
             // Obtener la lista de generos de la película
@@ -208,9 +210,9 @@ public class Pelicula implements Comparable<Pelicula> {
     
             for (String genero : generos) {
                 // Obtener la tabla de anios (tabla secundaria) para el genero actual
-                ST<Integer, List<Pelicula>> stAnio = clasificacion.get(genero);
+                BST<Integer, List<Pelicula>> stAnio = clasificacion.get(genero);
                 if (stAnio == null) {
-                    stAnio = new ST<>();
+                    stAnio = new BST<>();
                     clasificacion.put(genero, stAnio);
                 }
     
@@ -229,13 +231,13 @@ public class Pelicula implements Comparable<Pelicula> {
         return clasificacion;
     }
     
-    public static void imprimirClasificacion(ST<String, ST<Integer, List<Pelicula>>> clasificacion) {
+    public static void imprimirClasificacion(ST<String, BST<Integer, List<Pelicula>>> clasificacion) {
         List<String> generos = clasificacion.keys();
 
         for (String genero : generos) {
             System.out.println("Genero: " + genero);
-            ST<Integer, List<Pelicula>> stAnio = clasificacion.get(genero);
-            List<Integer> anios = stAnio.keys();
+            BST<Integer, List<Pelicula>> stAnio = clasificacion.get(genero);
+            Iterable<Integer> anios = stAnio.keys();
 
             for (Integer anio : anios) {
                 System.out.println("  Anio: " + anio);
@@ -250,14 +252,14 @@ public class Pelicula implements Comparable<Pelicula> {
     }
 
     public static List<Pelicula> topGeneroAnios(
-        ST<String, ST<Integer, List<Pelicula>>> pelisXgeneroXanio,
+        ST<String, BST<Integer, List<Pelicula>>> pelisXgeneroXanio,
         String genero,
         int anoInicio,
         int anoFin,
         int M ) {
         
         // Obtener la tabla de anios para el genero especificado
-        ST<Integer, List<Pelicula>> stAnio = pelisXgeneroXanio.get(genero);
+        BST<Integer, List<Pelicula>> stAnio = pelisXgeneroXanio.get(genero);
         if (stAnio == null) {
             // No hay peliculas para este genero
             return null;
