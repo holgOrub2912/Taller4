@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import edu.princeton.cs.algs4.MinPQ;
 //usar BarChart de la libreia JFreeChart
 
 public class Pelicula implements Comparable<Pelicula> {
@@ -254,43 +255,36 @@ public class Pelicula implements Comparable<Pelicula> {
         int anoFin,
         int M ) {
         
-        List<Pelicula> peliculas = new ArrayList<>();
-
         // Obtener la tabla de anios para el genero especificado
         ST<Integer, List<Pelicula>> stAnio = pelisXgeneroXanio.get(genero);
         if (stAnio == null) {
             // No hay peliculas para este genero
-            return peliculas; // Lista vacía
+            return null;
         }
+
+        Comparator<Pelicula> cmp = new PeliculaVoteComparator();
+        MinPQ<Pelicula> pelipq = new MinPQ(M, cmp);
 
         // Obtener los anios dentro del rango especificado 
         Iterable<Integer> years = stAnio.keys(anoInicio, anoFin);
-        for (Integer ano : years) {
-            List<Pelicula> listaPelis = stAnio.get(ano);
-            if (listaPelis != null) {
-                peliculas.addAll(listaPelis);
-            }
-        }
+        for (Integer ano : years)
+            for (Pelicula peli:  stAnio.get(ano))
+                if ( pelipq.size() < M )
+                    pelipq.insert(peli);
+                else if ( cmp.compare(peli, pelipq.min()) > 0 ){
+                    pelipq.delMin();
+                    pelipq.insert(peli);
+                }
 
-        if (peliculas.isEmpty()) {
+        if (pelipq.isEmpty()) {
             // No hay películas en el rango especificado
-            return peliculas; // Lista vacia
+            return null;
         }
 
-        // Ordenar las peliculas por vote_average en orden descendente
-        peliculas.sort(new Comparator<Pelicula>() {
-            @Override
-            public int compare(Pelicula p1, Pelicula p2) {
-                return Double.compare(p2.getVoteAverage(), p1.getVoteAverage());
-            }
-        });
-
-        // Obtener las top-M películas
-        if (M > peliculas.size()) {
-            M = peliculas.size();
-        }
-
-        return peliculas.subList(0, M);
+        List<Pelicula> topPeliculas = new ArrayList<Pelicula>(M);
+        for (Pelicula peli: pelipq)
+            topPeliculas.add(peli);
+        return topPeliculas;
     }
 
 }
