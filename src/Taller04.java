@@ -44,14 +44,14 @@ public class Taller04 {
             // Clasificar las películas por genero y año
             ST<String, BST<Integer, List<Pelicula>>> clasificacion = Pelicula.clasificarPeliculas(array_pelis);
             
-            // Imprimir la clasificación
-           Pelicula.imprimirClasificacion(clasificacion);
+	          // Imprimir la clasificación
+						// Pelicula.imprimirClasificacion(clasificacion);
 
 
             // Determinar las top-M películas de un genero en un rango de años
             String generoBuscado = menuGenero(clasificacion.keys());
             int anoInicio = promptInteger("Ingrese el año de inicio: ", sel -> true);
-            int anoFin = promptInteger("Ingrese el año de finalización: ", sel -> true);
+            int anoFin = promptInteger("Ingrese el año de finalización: ", sel -> sel > anoInicio);
             int M = promptInteger("Ingresse la cantidad de películas en el top: ", sel -> sel > 0); 
             
             List<Pelicula> topPelis = Pelicula.topGeneroAnios(clasificacion, generoBuscado, anoInicio, anoFin, M);
@@ -59,9 +59,12 @@ public class Taller04 {
             System.out.println();
             // Imprimir las top-M películas
             System.out.println("Top " + M + " películas de genero " + generoBuscado + " entre " + anoInicio + " y " + anoFin + ":");
-            for (Pelicula peli : topPelis) {
-                System.out.println(peli);
-            }
+            if (topPelis != null)
+	            for (int i = 0; i < topPelis.size(); i++) {
+	                System.out.printf("%2d) %s\n", i+1, topPelis.get(i).toString());
+	            }
+	          else
+	          	System.out.println("No se encontraron películas");
         } catch (IOException e) {
             System.err.println("Error al leer el archivo CSV: " + e.getMessage());
             e.printStackTrace();
