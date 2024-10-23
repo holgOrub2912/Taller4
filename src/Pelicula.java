@@ -283,6 +283,7 @@ public class Pelicula implements Comparable<Pelicula> {
             // No hay películas en el rango especificado
             return null;
         }
+        M = pelipq.size();
 
         Pelicula[] peliarr = new Pelicula[M];
         for (Pelicula peli: pelipq)
