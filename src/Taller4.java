@@ -6,7 +6,7 @@ import java.util.function.IntPredicate;
 import edu.princeton.cs.algs4.BST;
 import edu.princeton.cs.algs4.StdIn;
 
-public class Taller04 {
+public class Taller4 {
     public static final String RUTA_CSV = "final_dataset.csv";
     public static int promptInteger(String prompt, IntPredicate constraint){
 		int r;
