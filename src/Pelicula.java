@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Arrays;
 import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.BST;
->>>>>>> b0110c521d5821ad2d58b2c3ec8ee892619680cc
 //usar BarChart de la libreia JFreeChart
 
 public class Pelicula implements Comparable<Pelicula> {
