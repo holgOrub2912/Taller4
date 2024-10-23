@@ -1,3 +1,4 @@
+/* AUTORES: Isabela Arrubla Orozco, Fernando González Rivero */
 import java.util.Comparator;
 
 public class PeliculaVoteComparator implements Comparator<Pelicula> {
