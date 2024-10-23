@@ -67,6 +67,7 @@ public class Pelicula implements Comparable<Pelicula> {
         String cleaned = genreList.replace("[", "")
                                .replace("]", "")
                                .replace("'", "")
+                               .replace("\"", "")
                                .trim();
 
         // Dividir por comas
