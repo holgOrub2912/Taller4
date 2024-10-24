@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntPredicate;
 import edu.princeton.cs.algs4.BST;
+import edu.princeton.cs.algs4.ST;
 import edu.princeton.cs.algs4.StdIn;
 
 public class Taller4 {
@@ -53,7 +54,7 @@ public class Taller4 {
             String generoBuscado = menuGenero(clasificacion.keys());
             int anoInicio = promptInteger("Ingrese el año de inicio: ", sel -> true);
             int anoFin = promptInteger("Ingrese el año de finalización: ", sel -> sel > anoInicio);
-            int M = promptInteger("Ingresse la cantidad de películas en el top: ", sel -> sel > 0); 
+            int M = promptInteger("Ingrese la cantidad de películas en el top: ", sel -> sel > 0); 
             
             List<Pelicula> topPelis = Pelicula.topGeneroAnios(clasificacion, generoBuscado, anoInicio, anoFin, M);
             

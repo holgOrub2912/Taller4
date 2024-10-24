@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Arrays;
 import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.BST;
-//usar BarChart de la libreia JFreeChart
+import edu.princeton.cs.algs4.ST;
 
 public class Pelicula implements Comparable<Pelicula> {
 
@@ -232,7 +232,7 @@ public class Pelicula implements Comparable<Pelicula> {
     }
     
     public static void imprimirClasificacion(ST<String, BST<Integer, List<Pelicula>>> clasificacion) {
-        List<String> generos = clasificacion.keys();
+        Iterable<String> generos = clasificacion.keys();
 
         for (String genero : generos) {
             System.out.println("Genero: " + genero);
